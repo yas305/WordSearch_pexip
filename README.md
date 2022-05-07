@@ -48,13 +48,13 @@ the reason I chose to use a dictionary was because of keylookups costing O(1). T
 isn't any possible way to get all substrings of a word faster than O(n^2). but I tried to optimise this by only getting 
 substring of length greater than 1 and less than MAX_WORD_LENGTH. which saved space and time.
 
-###Test cases
+### Test cases
 As expected all my testcases passed. i had used the unit test library 
 to test my code. I had also used .txt with 10000 random words to test the efficiency of the code.
 Additionally i always used print statements to double check that the code is working as expected.
 
 
-###Bonus question
+### Bonus question
 For the bonus question I used the same method to get all the substrings of the grid however 
 I used multiple threads to generate the substrings. I used the multiprocessing library to do this.
 I noticed that the time to run was much faster than the first attempt down to sub 9 seconds. however, creating 
