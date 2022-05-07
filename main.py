@@ -21,10 +21,10 @@ def read_as_one_string(file)->str:
 
 def main():
     # gridString = read_as_one_string("wordlist10k.txt")
-    ws=WordSearch(read_as_one_string("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/10kword.txt"))
+    ws=WordSearch(read_as_one_string("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/5x5grid.txt"))
 
-    words_to_find = LoadWordList("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/1millionwords.txt")
-
+    # words_to_find = LoadWordList("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/1millionwords.txt")
+    words_to_find = ["ill"]
     for word in words_to_find:
         if ws.is_present(word):
             print("found {}".format(word))

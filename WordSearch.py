@@ -1,6 +1,4 @@
 import math
-import time
-import re
 
 
 def get_transposed_gridstring(grid, row_length)->tuple:
@@ -18,8 +16,8 @@ class WordSearch:
     dict = {}
     grid_length = 0
     row_length = 0
-    separatedwords = []
-    transposed_grid = []
+    default_grid_first = []
+    transposed_grid_first = []
     MAX_WORD_LENGTH = 24
 
     def __init__(self, grid):
@@ -27,9 +25,11 @@ class WordSearch:
         self.grid = self.clean_string(grid)
         self.grid_length = len(grid)
         self.row_length = int(math.sqrt(self.grid_length))
-        self.separatedwords = self.seperate_words()
-        self.transposed_grid = get_transposed_gridstring(grid, self.row_length)
-        self.dict = self.getallsubstring(self.separatedwords + self.transposed_grid[-1])
+        self.default_grid_first = self.seperate_words()
+        print(self.default_grid_first)
+        self.transposed_grid_first = get_transposed_gridstring(grid, self.row_length)[-1]
+        print(self.transposed_grid_first)
+        self.dict = self.getallsubstring(self.default_grid_first + self.transposed_grid_first)
 
 
     def clean_string(self, grid_string) -> str:
@@ -65,8 +65,9 @@ class WordSearch:
         for word in word_list:
             for i in range(len(word)):
                 for x in range(i, len(word) + 1):
-                    # only add the substring if it is not already in the dictionary and the length is greater than 1 and less than the max word length
-                    if word[i:x] not in dict and len(word[i:x]) > 1 and len(word[i:x]) <= self.MAX_WORD_LENGTH:
+                    # only add the substring if it is not already in the dictionary and the length is greater than 1
+                    # and less than the max word length
+                    if word[i:x] not in dict and 1 < len(word[i:x]) <= self.MAX_WORD_LENGTH:
                         dict[word[i:x]] = True
         return dict
 

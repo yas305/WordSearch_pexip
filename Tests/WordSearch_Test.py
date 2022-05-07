@@ -32,6 +32,12 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(ws.is_present("hello\n"), False)
         self.assertEqual(ws.is_present("hello"), True)
 
+    def test_large_grid(self):
+        ws = WordSearch.WordSearch(read_as_one_string("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/10kword.txt"))
+        self.assertEqual(ws.is_present("rivestranslatorautomobiles"), False)
+        self.assertEqual(ws.is_present("rivestranslatorautomobil"), True)
+        self.assertEqual(ws.is_present(""), False)
+        self.assertEqual(ws.is_present("hello"), True)
 
 if __name__ == '__main__':
     unittest.main()

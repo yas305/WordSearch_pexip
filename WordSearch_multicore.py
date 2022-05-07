@@ -61,9 +61,9 @@ class WordSearch:
 
 
 def main():
-    ws=WordSearch(read_as_one_string("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/5x5grid.txt"))
-    # words_to_find = LoadWordList("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/1millionwords.txt")
-    words_to_find=["pexip"]
+    ws=WordSearch(read_as_one_string("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/10kword.txt"))
+    words_to_find = LoadWordList("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/1millionwords.txt")
+
     with concurrent.futures.ProcessPoolExecutor() as executor:
 
         f1 = executor.submit(getallsubstring, ws.default_grid_first, ws.MAX_WORD_LENGTH)
