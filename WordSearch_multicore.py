@@ -21,9 +21,7 @@ class WordSearch:
     row_length = 0
     transposed_grid=""
     default_grid_first = []
-    default_grid_second = []
     transposed_grid_first = []
-    transposed_grid_second = []
     MAX_WORD_LENGTH = 24
 
     def __init__(self, grid):
@@ -32,29 +30,25 @@ class WordSearch:
         # remove all non alphanumeric characters and whitespace
         grid = grid.replace(regex, "").replace(" ", "")
 
-        if len(grid) % math.sqrt(len(grid)) != 0:
-            while len(grid) % math.sqrt(len(grid)) != 0:
-                grid = grid[:-1]
+        while len(grid) % math.sqrt(len(grid)) != 0:
+            grid = grid[:-1]
 
         self.grid = grid
-        self.transposed_grid=get_transposed_gridstring(grid, int(math.sqrt(len(grid))))
+        self.transposed_grid=get_transposed_gridstring(grid, int(math.sqrt(len(grid))))[0]
         self.grid_length = len(grid)
         self.row_length = int(math.sqrt(self.grid_length))
-        self.default_grid_first = self.seperate_words()[0]
-        self.default_grid_second = self.seperate_words()[1]
-        self.transposed_grid_first = self.seperate_words()[0]
-        self.transposed_grid_second = self.seperate_words()[1]
+        self.default_grid_first = self.seperate_words(grid)
+        self.transposed_grid_first = self.seperate_words(self.transposed_grid)
+
         self.dict = {}
 
-    def seperate_words(self):
+    def seperate_words(self, word):
         seperated_words = []
         # split the string every row_length characters
         for i in range(0, self.grid_length, self.row_length):
-            seperated_words.append(self.grid[i:i + self.row_length])
+            seperated_words.append(word[i:i + self.row_length])
 
-        #split seperated_words into two seperate grids
-        second_half = seperated_words[:len(seperated_words) // 2]
-        return (seperated_words, second_half)
+        return seperated_words
 
 
     def is_present(self, word, ):
@@ -67,19 +61,16 @@ class WordSearch:
 
 
 def main():
-    ws=WordSearch(read_as_one_string("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/10kword.txt"))
-    words_to_find = LoadWordList("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/1millionwords.txt")
+    ws=WordSearch(read_as_one_string("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/5x5grid.txt"))
+    # words_to_find = LoadWordList("C:/Users/yahie/PycharmProjects/Pexip_homework/resources/1millionwords.txt")
+    words_to_find=["pexip"]
     with concurrent.futures.ProcessPoolExecutor() as executor:
 
         f1 = executor.submit(getallsubstring, ws.default_grid_first, ws.MAX_WORD_LENGTH)
-        f2 = executor.submit(getallsubstring, ws.default_grid_second, ws.MAX_WORD_LENGTH)
-        f3 = executor.submit(getallsubstring, ws.transposed_grid_first, ws.MAX_WORD_LENGTH)
-        f4 = executor.submit(getallsubstring, ws.transposed_grid_second, ws.MAX_WORD_LENGTH)
-
+        f2 = executor.submit(getallsubstring, ws.transposed_grid_first, ws.MAX_WORD_LENGTH)
         ws.dict.update(f1.result())
         ws.dict.update(f2.result())
-        ws.dict.update(f3.result())
-        ws.dict.update(f4.result())
+
 
     for word in words_to_find:
         if ws.is_present(word):
