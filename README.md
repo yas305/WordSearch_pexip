@@ -30,9 +30,9 @@ As a bonus question: how would you go about taking advantage of a multicore syst
 The first task is to clean up the string, i.e. remove all the non alphabet characters so i used simple regex to do this.
 I removed characters from the string until len(grid) was a square number.
 
-###problems I had with this code
+### problems I had with this code
 my first and initial attempt was a very niave way of doing this. essentially I would
-separate the string into a list of strings (for rows and columns) each of length ROW_LENGTH. then I would
+separate the grid into a list of strings (for rows and columns) each of length ROW_LENGTH. then I would
 iterate through the list and check if the word is in the list using the in operator.
 This obviously worked for a small 26x26 grid but it was not optimised for a large grid.
 It took nearly 1 hour to run (I had gone for dinner and was surprised that the program was still running).
@@ -58,8 +58,8 @@ Additionally i always used print statements to double check that the code is wor
 For the bonus question I used the same method to get all the substrings of the grid however 
 I used multiple threads to generate the substrings. I used the multiprocessing library to do this.
 I noticed that the time to run was much faster than the first attempt down to sub 9 seconds. however, creating 
- more than 2 threads made negligible difference. One Thread was assigned to getting all substring of the default grid
-and the other threads were assigned to get all substring of the transposed grid. having threads do this in parallel
+ more than 2 threads made negligible difference. One Thread was assigned to getting all substring of the default grid (rows)
+and the other threads were assigned to get all substring of the transposed grid (colums). having threads do this in parallel
 made the program run much faster. With even more optimisation I could easily run my program in less than 5 seconds 
 
 
