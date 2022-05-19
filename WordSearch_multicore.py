@@ -1,4 +1,6 @@
 import concurrent.futures
+import time
+
 from WordSearch import *
 from main import LoadWordList, read_as_one_string
 
