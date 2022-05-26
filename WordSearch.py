@@ -1,7 +1,7 @@
 import math
 
 
-def get_transposed_gridstring(grid, row_length)->tuple:
+def get_transposed_gridstring(grid, row_length) -> tuple:
     """":returns a tuple of the transposed grid as a string and a list"""
     list = []
 
@@ -31,7 +31,6 @@ class WordSearch:
         print(self.transposed_grid_first)
         self.dict = self.getallsubstring(self.default_grid_first + self.transposed_grid_first)
 
-
     def clean_string(self, grid_string) -> str:
         """removes all non-alphanumeric characters from a word"""
         regex = "/^[A-Z]+"
@@ -44,10 +43,7 @@ class WordSearch:
                 grid_string = grid_string[:-1]
         return grid_string
 
-
-
-
-    def seperate_words(self)-> list:
+    def seperate_words(self) -> list:
 
         """"seperates one massive string into into a list words of length GRID_ROW_LENGTH"""
 
@@ -76,6 +72,19 @@ class WordSearch:
             return True
         else:
             return False
+
+    # def is_present2(self, word) -> bool:
+    #     # check if word is in grid
+    #     if word in self.default_grid_first or word in self.transposed_grid_first:
+    #         # get the index of the word in the grid
+    #         first_index = self.default_grid_first.index(word)
+    #         last_index = first_index + len(word)
+    #         print(first_index)
+    #         print(last_index)
+    #         # check if the indexes are within the grid the bounds of grid length
+    #         if first_index >= 0 and last_index <= self.grid_length:
+    #             return True
+    #         return False
 
     # def is_present_using_in(self, word):
     #     #loop through separated words
